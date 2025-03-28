@@ -16,7 +16,7 @@
         const nome = document.getElementById("nome");
         const mensagem = document.getElementById("mensagem");
 
-        const socket = new WebSocket("ws://" + location.host + "/chat");
+        const socket = new WebSocket("wss://" + location.host + "/chat");
 
         socket.onmessage = function(event) {
             const li = document.createElement("li");
