@@ -24,7 +24,6 @@ O projeto consiste na construção de um sistema de comunicação entre processo
 
 - `/src` - Códigos-fonte do backend (Java/Spring Boot)
 - `/resources/static` - Frontend com HTML e JS
-- `Relatorio_Chat_WebSocket_Provisorio.docx` - Relatório técnico formatado conforme ABNT
 
 ## 🚀 Como Executar
 
