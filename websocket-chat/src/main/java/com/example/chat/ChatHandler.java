@@ -1,6 +1,5 @@
 package com.example.chat;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,7 +37,10 @@ public class ChatHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String horario = LocalTime.now().withNano(0).toString(); // Horário sem nanossegundos
+        String horario = java.time.ZonedDateTime.now(java.time.ZoneId.of("America/Sao_Paulo"))
+                    .toLocalTime()
+                    .withNano(0)
+                    .toString();
         String conteudo = message.getPayload();
 
         // Mensagem formatada com horário
