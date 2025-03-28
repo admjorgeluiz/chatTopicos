@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat WebSocket</title>
+</head>
+<body>
+    <h2>Chat</h2>
+    <input id="nome" placeholder="Seu nome" /><br><br>
+    <input id="mensagem" placeholder="Digite sua mensagem" />
+    <button onclick="enviar()">Enviar</button>
+    <ul id="chat"></ul>
+
+    <script>
+        const chat = document.getElementById("chat");
+        const nome = document.getElementById("nome");
+        const mensagem = document.getElementById("mensagem");
+
+        const socket = new WebSocket("ws://" + location.host + "/chat");
+
+        socket.onmessage = function(event) {
+            const li = document.createElement("li");
+            li.textContent = event.data;
+            chat.appendChild(li);
+        };
+
+        function enviar() {
+            if (mensagem.value.trim() !== "") {
+                socket.send("[" + nome.value + "]: " + mensagem.value);
+                mensagem.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
