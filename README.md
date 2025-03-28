@@ -49,15 +49,6 @@ O projeto consiste na construção de um sistema de comunicação entre processo
 - Envio e recebimento de mensagens em tempo real
 - Validação do uso de ThreadPool na versão com TCP
 
-## 📄 Relatório Técnico
-
-O relatório inclui:
-- Introdução teórica (sockets, concorrência, arquitetura cliente-servidor)
-- Explicação da implementação com trechos de código
-- Diagrama de comunicação
-- Resultados dos testes
-- Capa e folha de rosto segundo as normas da **ABNT NBR 14724:2011**
-
 ## 👥 Autores
 
 - Anthony Mendes da Silva
