@@ -10,7 +10,6 @@ O projeto consiste na construção de um sistema de comunicação entre processo
 - Estudar e aplicar a comunicação entre processos em sistemas distribuídos.
 - Implementar sockets TCP com uso eficiente de **ThreadPool (ExecutorService)**.
 - Evoluir para WebSocket com suporte a múltiplos clientes via navegador.
-- Documentar todo o processo em relatório técnico conforme normas da **ABNT**.
 
 ## 🛠️ Tecnologias Utilizadas
 
