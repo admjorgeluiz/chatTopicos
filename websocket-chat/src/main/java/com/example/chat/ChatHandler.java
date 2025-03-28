@@ -63,4 +63,9 @@ public class ChatHandler extends TextWebSocketHandler {
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
         sessions.remove(session);
     }
+
+    public static List<String> getHistorico() {
+    return historico;
+}
+
 }
