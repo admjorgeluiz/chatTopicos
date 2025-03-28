@@ -1,107 +1,77 @@
-# Kramp - APP
+# Comunicação entre Processos em Sistemas Distribuídos
 
-Mobile application for Kramp, your gyms software.
+Este repositório apresenta um projeto de sistema de chat desenvolvido como atividade acadêmica da disciplina **Tópicos Especiais em Computação**, ministrada na **Universidade Tiradentes**.
 
-## Table of Contents
+## 📘 Sobre o Projeto
 
-- [Kramp - APP](#kramp---app)
-  - [Table of Contents](#table-of-contents)
-  - [Useful links](#useful-links)
-  - [Style](#style)
-    - [Colors](#colors)
-    - [Typography](#typography)
-  - [Stack](#stack)
-  - [Installation](#installation)
-  - [Run the application](#run-the-application)
+O projeto consiste na construção de um sistema de comunicação entre processos, inicialmente utilizando **Sockets TCP** com Java e posteriormente migrando para uma arquitetura moderna baseada em **WebSockets com Spring Boot**.
 
+### 🎯 Objetivos
+- Estudar e aplicar a comunicação entre processos em sistemas distribuídos.
+- Implementar sockets TCP com uso eficiente de **ThreadPool (ExecutorService)**.
+- Evoluir para WebSocket com suporte a múltiplos clientes via navegador.
+- Documentar todo o processo em relatório técnico conforme normas da **ABNT**.
 
-## Useful links
+## 🛠️ Tecnologias Utilizadas
 
-- [Jira](https://jorge-nascimento.atlassian.net/jira/core/projects/KRAM/board?atlOrigin=eyJpIjoiNDM4MjNiNDc2OTljNGQxOGJhMmFhYTc1ZTU0ODFiYWYiLCJwIjoiaiJ9) (Scrum)
-- [Figma](https://www.figma.com/design/CzR0P8o3JGyN4xmPwLAu1p/Krumpy?node-id=0-1&t=TLWMtf6QAXhWmAOt-1) (Project UI)
+- Java 17+
+- Spring Boot
+- WebSocket API
+- HTML5 / JavaScript
+- Maven
 
-## Style
+## 📁 Estrutura do Projeto
 
-### Colors
+- `/src` - Códigos-fonte do backend (Java/Spring Boot)
+- `/resources/static` - Frontend com HTML e JS
+- `Relatorio_Chat_WebSocket_Provisorio.docx` - Relatório técnico formatado conforme ABNT
 
-The chosen colors ware shades of `lime` and `neutral` including 50-950.
+## 🚀 Como Executar
 
-[TailwindCSS Palette](https://tailwindcss.com/docs/customizing-colors)
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
 
-### Typography
+2. Navegue até o diretório e execute com Maven:
+   ```bash
+   cd websocket-chat
+   mvn spring-boot:run
+   ```
 
-![Roboto](https://hipfonts.com/wp-content/uploads/2019/06/robotosans-sample.jpg)
+3. Acesse no navegador:
+   ```
+   http://localhost:8080/index.html
+   ```
 
-[Google Fonts](https://fonts.google.com/specimen/Roboto)
+## 🧪 Testes Realizados
 
-See more at [Figma project](https://www.figma.com/design/CzR0P8o3JGyN4xmPwLAu1p/Krumpy?node-id=0-1&t=TLWMtf6QAXhWmAOt-1)
+- Execução em múltiplos navegadores e dispositivos
+- Envio e recebimento de mensagens em tempo real
+- Validação do uso de ThreadPool na versão com TCP
 
-## Stack
+## 📄 Relatório Técnico
 
-- Node.js
-- React Native
-- Expo
-- Typescript
-- TailwindCSS
-- Nativewind
-- Lucid Icons
-- Dayjs
-- Zod
+O relatório inclui:
+- Introdução teórica (sockets, concorrência, arquitetura cliente-servidor)
+- Explicação da implementação com trechos de código
+- Diagrama de comunicação
+- Resultados dos testes
+- Capa e folha de rosto segundo as normas da **ABNT NBR 14724:2011**
 
-> NPM as package manager.
+## 👥 Autores
 
-## Installation
+- Anthony Mendes da Silva
+- Breno Mateus Martins Barreto
+- Gabriel Soares
+- Gustavo Moreira Santos
+- Jorge Luiz Machado Nascimento
+- Leonardo Henrique Lopes Cardozo
 
-1. Clone the repository:
+## 🎓 Orientação
 
-```
-git@github.com:wolney-fo/kramp-app.git
-```
+**Prof. Felipe dos Anjos Lima**
 
-2. Navigate to the project directory:
+---
 
-```
-cd kramp-app
-```
-
-3. Install the dependencies:
-
-```
-npm install
-```
-
-## Run the application
-
-To run the application, you can use the following command:
-
-```
-npm run start
-```
-
-When build is finished, you can open it using your web browser, physical device or an Android VM with the following steps:
-
-<details>
-<summary>Web browser (easier)</summary>
-
-Press `a` in expo console
-
-</details>
-
-<details>
-<summary>Physical device</summary>
-1. Download Expo Go app:
-
-- [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR)
-- [iOS](https://apps.apple.com/br/app/expo-go/id982107779)
-
-2. Scan the QR code generated in build.
-
-</details>
-
-<details>
-<summary>Android VM (Android Studio)</summary>
-
-1. Execute an Android machine.
-
-2. Press `a` in Expo console.
-</details>
+> Projeto acadêmico — Universidade Tiradentes | Aracaju — 2025
