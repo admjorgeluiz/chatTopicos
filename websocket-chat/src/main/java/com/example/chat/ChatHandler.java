@@ -1,5 +1,8 @@
 package com.example.chat;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,21 +16,73 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class ChatHandler extends TextWebSocketHandler {
 
-    // Sessões dos clientes conectados
     private static final Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<>());
-
-    // Histórico das mensagens (em memória)
     private static final List<String> historico = Collections.synchronizedList(new ArrayList<>());
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) {
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
 
-        // Enviar o histórico de mensagens para o novo cliente
+        // Envia o histórico para o novo cliente
         synchronized (historico) {
             for (String msg : historico) {
+                session.sendMessage(new TextMessage(msg));
+            }
+        }
+    }
+
+    @Override
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        // Se o nome não estiver na sessão, extrai da primeira mensagem
+        if (!session.getAttributes().containsKey("nome")) {
+            String payload = message.getPayload();
+            String nome = payload.substring(payload.indexOf('[') + 1, payload.indexOf(']')).trim();
+            session.getAttributes().put("nome", nome);
+
+            String aviso = "⚠️ " + nome + " entrou no chat";
+            historico.add(aviso);
+            enviarParaTodos(aviso);
+        }
+
+        String nome = (String) session.getAttributes().get("nome");
+
+        // Formatar data e hora
+        ZonedDateTime agora = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
+        String horario = agora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+        // Extrair conteúdo da mensagem (remover o prefixo [nome]:)
+        String conteudo = message.getPayload().substring(message.getPayload().indexOf("]:") + 2).trim();
+        String mensagemFormatada = "[" + horario + "] " + nome + ": " + conteudo;
+
+        synchronized (historico) {
+            historico.add(mensagemFormatada);
+            if (historico.size() > 100) {
+                historico.remove(0);
+            }
+        }
+        
+        enviarParaTodos(mensagemFormatada);
+    }
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        sessions.remove(session);
+
+        String nome = (String) session.getAttributes().get("nome");
+        if (nome != null) {
+            String aviso = "❌ " + nome + " saiu do chat";
+            historico.add(aviso);
+            enviarParaTodos(aviso);
+        }
+    }
+
+    private void enviarParaTodos(String mensagem) {
+        synchronized (sessions) {
+            for (WebSocketSession s : sessions) {
                 try {
-                    session.sendMessage(new TextMessage(msg));
+                    if (s.isOpen()) {
+                        s.sendMessage(new TextMessage(mensagem));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -35,37 +90,7 @@ public class ChatHandler extends TextWebSocketHandler {
         }
     }
 
-    @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String horario = java.time.ZonedDateTime.now(java.time.ZoneId.of("America/Sao_Paulo"))
-                    .toLocalTime()
-                    .withNano(0)
-                    .toString();
-        String conteudo = message.getPayload();
-
-        // Mensagem formatada com horário
-        String mensagemFormatada = "[" + horario + "] " + conteudo;
-
-        // Armazenar no histórico
-        historico.add(mensagemFormatada);
-
-        // Enviar para todos os clientes conectados
-        synchronized (sessions) {
-            for (WebSocketSession s : sessions) {
-                if (s.isOpen()) {
-                    s.sendMessage(new TextMessage(mensagemFormatada));
-                }
-            }
-        }
-    }
-
-    @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-        sessions.remove(session);
-    }
-
     public static List<String> getHistorico() {
-    return historico;
-}
-
+        return historico;
+    }
 }
