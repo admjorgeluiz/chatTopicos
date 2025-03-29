@@ -1,35 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Chat WebSocket</title>
+  <meta charset="UTF-8" />
+  <title>Chat Tópicos</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    #chat {
+      width: 90%;
+      max-width: 600px;
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 20px;
+      height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      max-width: 600px;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1565c0;
+    }
+  </style>
 </head>
 <body>
-    <h2>Chat</h2>
-    <input id="nome" placeholder="Seu nome" /><br><br>
-    <input id="mensagem" placeholder="Digite sua mensagem" />
-    <button onclick="enviar()">Enviar</button>
-    <ul id="chat"></ul>
+  <h1>Chat em Tempo Real</h1>
+  <div id="chat"></div>
 
-    <script>
-        const chat = document.getElementById("chat");
-        const nome = document.getElementById("nome");
-        const mensagem = document.getElementById("mensagem");
+  <input type="text" id="nome" placeholder="Seu nome" />
+  <input type="text" id="mensagem" placeholder="Digite sua mensagem" />
+  <button onclick="enviar()">Enviar</button>
 
-        const socket = new WebSocket("wss://" + location.host + "/chat");
+  <script>
+    const chat = document.getElementById("chat");
+    const socket = new WebSocket("wss://" + location.host + "/chat");
 
-        socket.onmessage = function(event) {
-            const li = document.createElement("li");
-            li.textContent = event.data;
-            chat.appendChild(li);
-        };
+    socket.onmessage = function (event) {
+      const p = document.createElement("p");
+      p.textContent = event.data;
+      chat.appendChild(p);
+      chat.scrollTop = chat.scrollHeight;
+    };
 
-        function enviar() {
-            if (mensagem.value.trim() !== "") {
-                socket.send("[" + nome.value + "]: " + mensagem.value);
-                mensagem.value = "";
-            }
-        }
-    </script>
+    function enviar() {
+      const nome = document.getElementById("nome").value;
+      const msg = document.getElementById("mensagem").value;
+      if (nome && msg) {
+        socket.send("[" + nome + "]: " + msg);
+        document.getElementById("mensagem").value = "";
+      }
+    }
+  </script>
 </body>
 </html>
