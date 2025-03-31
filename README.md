@@ -1,66 +1,89 @@
-# Comunicação entre Processos em Sistemas Distribuídos
+# 💬 Chat WebSocket com Spring Boot
 
-Este repositório apresenta um projeto de sistema de chat desenvolvido como atividade acadêmica da disciplina **Tópicos Especiais em Computação**, ministrada na **Universidade Tiradentes**.
+Este projeto é um sistema de chat em tempo real utilizando WebSocket, desenvolvido com **Spring Boot**, HTML e JavaScript. Ele permite que múltiplos usuários se conectem, enviem mensagens, visualizem o histórico e acompanhem em tempo real a entrada e saída de outros usuários.
 
-## 📘 Sobre o Projeto
+## 🚀 Funcionalidades
 
-O projeto consiste na construção de um sistema de comunicação entre processos, inicialmente utilizando **Sockets TCP** com Java e posteriormente migrando para uma arquitetura moderna baseada em **WebSockets com Spring Boot**.
+- Comunicação em tempo real via WebSocket
+- Exibição de nome, data e hora em cada mensagem
+- Histórico persistido em memória (últimas 100 mensagens)
+- Rota HTTP `/historico` para visualizar o histórico como JSON
+- Interface separada e estilizada para visualizar o histórico
+- Notificações de entrada e saída de usuários
+- Layout responsivo com frontend simples em HTML + CSS
 
-### 🎯 Objetivos
-- Estudar e aplicar a comunicação entre processos em sistemas distribuídos.
-- Implementar sockets TCP com uso eficiente de **ThreadPool (ExecutorService)**.
-- Evoluir para WebSocket com suporte a múltiplos clientes via navegador.
+## 🌐 Acesso online
 
-## 🛠️ Tecnologias Utilizadas
+Aplicação hospedada na Railway:
 
-- Java 17+
+🔗 [https://chattopicos-production.up.railway.app](https://chattopicos-production.up.railway.app)
+
+## 📁 Estrutura
+
+```
+├── src
+│   ├── main
+│   │   ├── java/com/example/chat
+│   │   │   ├── ChatHandler.java
+│   │   │   ├── ChatHistoryController.java
+│   │   │   ├── WebSocketConfig.java
+│   │   │   └── ChatServer.java (versão inicial com sockets TCP)
+│   │   └── resources/static
+│   │       ├── index.html            # Interface do chat
+│   │       └── historico.html        # Visualização do histórico
+```
+
+## 🧠 Tecnologias Utilizadas
+
+- Java 17
 - Spring Boot
-- WebSocket API
-- HTML5 / JavaScript
-- Maven
+- WebSocket
+- HTML5 + CSS3 + JavaScript
+- Railway (deploy)
 
-## 📁 Estrutura do Projeto
-
-- `/src` - Códigos-fonte do backend (Java/Spring Boot)
-- `/resources/static` - Frontend com HTML e JS
-
-## 🚀 Como Executar
+## 🔌 Como executar localmente
 
 1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   ```
 
-2. Navegue até o diretório e execute com Maven:
-   ```bash
-   cd websocket-chat
-   mvn spring-boot:run
-   ```
+```bash
+git clone https://github.com/SEU_USUARIO/chat-websocket.git
+cd chat-websocket
+```
 
-3. Acesse no navegador:
-   ```
-   http://localhost:8080/index.html
-   ```
+2. Compile e execute com Maven:
 
-## 🧪 Testes Realizados
+```bash
+./mvnw spring-boot:run
+```
 
-- Execução em múltiplos navegadores e dispositivos
-- Envio e recebimento de mensagens em tempo real
-- Validação do uso de ThreadPool na versão com TCP
+3. Acesse:
 
-## 👥 Autores
+```
+http://localhost:8080/index.html
+```
 
-- Anthony Mendes da Silva
-- Breno Mateus Martins Barreto
-- Gabriel Soares
-- Gustavo Moreira Santos
-- Jorge Luiz Machado Nascimento
-- Leonardo Henrique Lopes Cardozo
+Ou o histórico:
 
-## 🎓 Orientação
+```
+http://localhost:8080/historico.html
+```
 
-**Prof. Felipe dos Anjos Lima**
+## 🛠️ Melhorias futuras
 
----
+- Persistência do histórico em banco de dados
+- Sistema de autenticação
+- Comandos especiais no chat (ex: /ajuda, /limpar)
+- Painel de administração
 
-> Projeto acadêmico — Universidade Tiradentes | Aracaju — 2025
+## 👨‍💻 Desenvolvedores
+
+- Anthony Mendes da Silva  
+- Breno Mateus Martins Barreto  
+- Gabriel Soares  
+- Gustavo Moreira Santos  
+- Jorge Luiz Machado Nascimento  
+- Leonardo Henrique Lopes Cardozo  
+
+## 📝 Licença
+
+Este projeto é de uso educacional e livre para fins de aprendizado.

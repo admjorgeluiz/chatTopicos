@@ -1,4 +1,6 @@
 /Users/jorge/Documents/ProjetoTopicos/websocket-chat/src/main/java/com/example/chat/WebSocketConfig.java
+/Users/jorge/Documents/ProjetoTopicos/websocket-chat/src/main/java/com/example/chat/ChatHistoryController.java
 /Users/jorge/Documents/ProjetoTopicos/websocket-chat/src/main/java/com/example/chat/ChatServer.java
 /Users/jorge/Documents/ProjetoTopicos/websocket-chat/src/main/java/com/example/chat/ChatClient.java
+/Users/jorge/Documents/ProjetoTopicos/websocket-chat/src/main/java/com/example/chat/TcpServerRunner.java
 /Users/jorge/Documents/ProjetoTopicos/websocket-chat/src/main/java/com/example/chat/ChatHandler.java
