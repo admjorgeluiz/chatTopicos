@@ -93,3 +93,8 @@ http://localhost:8080/historico.html
 ## 📝 Licença
 
 Este projeto é de uso educacional e livre para fins de aprendizado.
+
+
+## 👨‍🏫 Professor Orientador
+
+- Felipe dos Anjos Lima
