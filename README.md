@@ -1,3 +1,4 @@
+
 # 💬 Chat WebSocket com Spring Boot
 
 Este projeto é um sistema de chat em tempo real utilizando WebSocket, desenvolvido com **Spring Boot**, HTML e JavaScript. Ele permite que múltiplos usuários se conectem, enviem mensagens, visualizem o histórico e acompanhem em tempo real a entrada e saída de outros usuários.
@@ -24,13 +25,18 @@ Aplicação hospedada na Railway:
 ├── src
 │   ├── main
 │   │   ├── java/com/example/chat
-│   │   │   ├── ChatHandler.java
-│   │   │   ├── ChatHistoryController.java
-│   │   │   ├── WebSocketConfig.java
-│   │   │   └── ChatServer.java (versão inicial com sockets TCP)
-│   │   └── resources/static
-│   │       ├── index.html            # Interface do chat
-│   │       └── historico.html        # Visualização do histórico
+│   │   │   ├── ChatClient.java             # Cliente via socket TCP (terminal)
+│   │   │   ├── ChatHandler.java            # WebSocket handler
+│   │   │   ├── ChatHistoryController.java  # Rota REST para histórico
+│   │   │   ├── ChatServer.java             # Versão legacy com socket TCP (sem Spring)
+│   │   │   ├── ChatServerTCP.java          # Servidor TCP independente com ThreadPool
+│   │   │   ├── TcpServerRunner.java        # Runner do servidor TCP embutido no Spring
+│   │   │   └── WebSocketConfig.java        # Configuração do endpoint WebSocket
+│   │   └── resources
+│   │       ├── application.properties
+│   │       └── static
+│   │           ├── index.html              # Interface principal do chat
+│   │           └── historico.html          # Visualização separada do histórico
 ```
 
 ## 🧠 Tecnologias Utilizadas
